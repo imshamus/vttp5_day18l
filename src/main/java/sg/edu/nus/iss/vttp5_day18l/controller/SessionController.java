@@ -10,13 +10,22 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpSession;
 import sg.edu.nus.iss.vttp5_day18l.model.SessionData;
+import sg.edu.nus.iss.vttp5_day18l.model.SessionDataList;
 
 // Mark this class as a Controller to handle HTTP requests
 @Controller
 @RequestMapping("/sessions") // Base URL for all methods in this controller
 public class SessionController {
+
+    private SessionDataList sessionDataList;
+
+    @PostConstruct
+    public void init(){
+        this.sessionDataList = new SessionDataList();
+    }
 
     // Display the home page
     @GetMapping("/home")
@@ -29,7 +38,9 @@ public class SessionController {
     @GetMapping("/list")
     public String showSessions(HttpSession httpSession, Model model) {
         // Retrieve the session data list from the HttpSession using the key "s"
-        List<SessionData> sessions = (List<SessionData>) httpSession.getAttribute("s");
+        SessionDataList sessionDataList = (SessionDataList) httpSession.getAttribute("s");
+        List<SessionData> listOfSessionDatas = sessionDataList.getSessionDataList();
+        // List<SessionData> sessions = (List<SessionData>) httpSession.getAttribute("s");
 
         // If no session data exists, initialize an empty list
         if (sessions == null) {
@@ -57,6 +68,13 @@ public class SessionController {
     @PostMapping("/createsession")
     public String postCreateSessionForm(@ModelAttribute("s") SessionData sessionData, HttpSession httpSession) {
         // Retrieve the current session data list from HttpSession using the key "s"
+        SessionDataList sessionDataList = new SessionDataList();
+        List<SessionData> list = sessionDataList.getSessionDataList();
+        list.add(sessionData);
+        httpSession.setAttribute("s", sessionDataList);
+
+        SessionDataList sessionList = (SessionDataList) httpSession.getAttribute("s");
+        sessionList.getSessions() = List<SessionData>;
         List<SessionData> sessions = (List<SessionData>) httpSession.getAttribute("s");
 
         // If no session data exists, initialize an empty list
