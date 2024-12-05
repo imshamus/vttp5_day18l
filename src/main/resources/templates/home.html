@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+<body>
+    <h3>Sessions Menu</h3>
+
+    <!-- Link to list session data -->
+    <form method="get" th:action="@{/sessions/list}">
+        <button type="submit">List Session Data</button>
+    </form>
+
+    <!-- Link to clear session data -->
+    <form method="post" th:action="@{/sessions/clear}">
+        <button type="submit">Clear Session Data</button>
+    </form>
+
+    <!-- Link to create a new session -->
+    <form method="get" th:action="@{/sessions/createsession}">
+        <button type="submit">Create Session Data</button>
+    </form>
+</body>
+</html>

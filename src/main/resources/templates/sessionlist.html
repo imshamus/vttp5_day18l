@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Session List</title>
+</head>
+<body>
+    <h3>Session Data</h3>
+
+    <!-- Table to display session data -->
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Date of Birth</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Loop through the list of sessions -->
+            <tr th:each="session : ${s}">
+                <td th:text="${session.name}"></td>
+                <td th:text="${session.dob}"></td>
+            </tr>
+            <!-- Display a message if the list is empty -->
+            <tr th:if="${s.size() == 0}">
+                <td colspan="2">No session data available</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Link back to home page -->
+    <a href="/sessions/home">Back to Home</a>
+</body>
+</html>

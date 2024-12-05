@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Session</title>
+</head>
+<body>
+    <h3>Create Session</h3>
+
+    <!-- Form to create session data -->
+    <form method="post" th:action="@{/sessions/createsession}" th:object="${s}">
+        <!-- Input for the name -->
+        <label for="name">Name:</label>
+        <input type="text" id="name" th:field="*{name}" required>
+        <br>
+
+        <!-- Input for the date of birth -->
+        <label for="dob">Date of Birth:</label>
+        <input type="date" id="dob" th:field="*{dob}" required>
+        <br>
+
+        <!-- Submit button -->
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
